@@ -1,0 +1,20 @@
+if __name__ == '__main__':
+    i=1
+    while i!='exit':
+        import socket
+        from socket import SOL_SOCKET, SO_REUSEADDR
+        ss=socket.socket()
+        #ss=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        ss.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+        ss.bind(('127.0.0.1',8080))
+        ss.listen()
+        conn,addr=ss.accept()
+        print(addr)
+        ret=conn.recv(1024).decode('utf-8')
+        print(ret)
+        data=input('plese input:',)
+        #conn.send(data.encode())
+        conn.send(bytes(data,encoding='utf-8'))
+        i = data
+    conn.close()
+    ss.close()
