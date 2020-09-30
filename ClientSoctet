@@ -1,0 +1,13 @@
+if __name__ == '__main__':
+    i=1
+    while i!='exit':
+        import socket
+        ss=socket.socket()
+        ss.connect(('127.0.0.1',8080))
+        data=input('Please input:',)
+       # ss.send(data.encode())
+        ss.send(bytes(data, encoding='utf-8'))
+        ret=ss.recv(1024).decode('utf-8')
+        print(ret)
+        i=data
+    ss.close()
